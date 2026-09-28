@@ -1,0 +1,94 @@
+PS C:\Users\nv24212\OneDrive - Nasser Center for Science and Technology\Documents\CC301\w1p1> git log -p main.tf
+commit b6afe2ad51e1580ef0c6092eba29c127173c173f
+Author: NV24212 <NV24212@labs.nvtc.edu.bh>
+Date:   Mon Sep 28 12:38:50 2026 +0300
+
+    Change port to 8080 for the proxy
+
+diff --git a/main.tf b/main.tf
+index e3b2017..81d61df 100644
+--- a/main.tf
++++ b/main.tf
+:
+commit b6afe2ad51e1580ef0c6092eba29c127173c173f
+Author: NV24212 <NV24212@labs.nvtc.edu.bh>
+Date:   Mon Sep 28 12:38:50 2026 +0300
+
+    Change port to 8080 for the proxy
+
+diff --git a/main.tf b/main.tf
+index e3b2017..81d61df 100644
+--- a/main.tf
++++ b/main.tf
+@@ -9,5 +9,5 @@ terraform {
+:
+commit b6afe2ad51e1580ef0c6092eba29c127173c173f
+Author: NV24212 <NV24212@labs.nvtc.edu.bh>
+Date:   Mon Sep 28 12:38:50 2026 +0300
+
+    Change port to 8080 for the proxy
+
+diff --git a/main.tf b/main.tf
+index e3b2017..81d61df 100644
+--- a/main.tf
++++ b/main.tf
+@@ -9,5 +9,5 @@ terraform {
+:
+commit b6afe2ad51e1580ef0c6092eba29c127173c173f
+Author: NV24212 <NV24212@labs.nvtc.edu.bh>
+Date:   Mon Sep 28 12:38:50 2026 +0300
+
+    Change port to 8080 for the proxy
+
+diff --git a/main.tf b/main.tf
+index e3b2017..81d61df 100644
+--- a/main.tf
++++ b/main.tf
+@@ -9,5 +9,5 @@ terraform {
+:
+commit b6afe2ad51e1580ef0c6092eba29c127173c173f
+Author: NV24212 <NV24212@labs.nvtc.edu.bh>
+Date:   Mon Sep 28 12:38:50 2026 +0300
+
+    Change port to 8080 for the proxy
+
+diff --git a/main.tf b/main.tf
+index e3b2017..81d61df 100644
+--- a/main.tf
++++ b/main.tf
+@@ -9,5 +9,5 @@ terraform {
+ 
+ resource "local_file" "config" {
+   filename = "${path.module}/config.txt"
+-  content  = "port=80\n"
++  content  = "port=8080\n"
+ }
+\ No newline at end of file
+
+commit 629047379fe51d4ca5e4c2971099c91860f05e18
+Author: NV24212 <NV24212@labs.nvtc.edu.bh>
+Date:   Mon Sep 28 12:38:13 2026 +0300
+
+    Set port to 80
+
+diff --git a/main.tf b/main.tf
+new file mode 100644
+index 0000000..e3b2017
+--- /dev/null
++++ b/main.tf
+@@ -0,0 +1,13 @@
++terraform {
++  required_providers {
++    local = {
++      source  = "hashicorp/local"
++      version = "~> 2.5"
++    }
++  }
++}
++
++resource "local_file" "config" {
++  filename = "${path.module}/config.txt"
++  content  = "port=80\n"
++}
+\ No newline at end of file
+(END)
