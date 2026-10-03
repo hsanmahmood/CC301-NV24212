@@ -1,0 +1,49 @@
+
+CC301 Lab W1P2 — Run It Twice
+
+1. ls output after running the script twice
+
+Directory: C:\Users\m3332\OneDrive\المستندات\Hasan\G12\Automation\CC301-NV24212\w1p2\servers
+
+Mode                 LastWriteTime         Length Name
+
+---
+
+-a----         10/3/2026  12:09 PM              0 web-1791018567270.txt
+-a----         10/3/2026  12:09 PM              0 web-1791018567520.txt
+
+2. Second terraform apply
+
+local_file.server: Refreshing state... [id=5e124f260025dfa0e42511161461295e417412a3]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+3. Changing role=web to role=api
+
+Plan symbol:
+-/+ destroy and then create replacement
+
+The change to the content caused Terraform to replace the resource.
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+4. Changing web.txt to web-server.txt
+
+Plan symbol:
+
+* create
+
+Terraform planned a new resource with the new filename.
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+5. Data loss explanation
+
+For a real bucket, a change that requires replacement can destroy the existing resource and create a new one. If the old bucket contained data, that data could be lost if it was not backed up or migrated first.
+
+In this lab, changing the content of the local_file resource produced a -/+ replacement. Changing the filename after that produced a + create plan because the previous content change had not been applied, so Terraform was still tracking the original web.txt resource and planned the new web-server.txt resource separately.
