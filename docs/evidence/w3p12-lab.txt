@@ -1,0 +1,78 @@
+plan before terraform init:
+terraform : ╷
+At line:2 char:220
++ ... Force $cap | Out-Null; Set-Location $lab; terraform plan 2>&1 | Tee-O ...
++                                               ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (╷:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+│ Error: Module not installed
+│ 
+│   on main.tf line 10:
+│   10: module "monday" {
+│ 
+│ This module is not yet installed. Run "terraform init" to install all
+│ modules required by this configuration.
+╵
+╷
+│ Error: Module not installed
+│ 
+│   on main.tf line 15:
+│   15: module "tuesday" {
+│ 
+│ This module is not yet installed. Run "terraform init" to install all
+│ modules required by this configuration.
+╵
+terraform state list:
+module.monday.local_file.this
+module.tuesday.local_file.this
+plan after renaming module monday to mon:
+module.tuesday.local_file.this: Refreshing state... [id=76daf3db8e8c952c7155ffbfcccea7185f3560f3]
+module.monday.local_file.this: Refreshing state... [id=59fd2757cb03afa74e96c41ed9ae426603d17cfd]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+  - destroy
+
+Terraform will perform the following actions:
+
+  # module.mon.local_file.this will be created
+  + resource "local_file" "this" {
+      + content              = <<-EOT
+            note for monday
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./monday.txt"
+      + id                   = (known after apply)
+    }
+
+  # module.monday.local_file.this will be destroyed
+  # (because local_file.this is not in configuration)
+  - resource "local_file" "this" {
+      - content              = <<-EOT
+            note for monday
+        EOT -> null
+      - content_base64sha256 = "v6f3STo7HGW3r5gNTqrnbzKh3u3w2vs/wQepmJCpgoA=" -> null
+      - content_base64sha512 = "lV7faqmVZenuSy3jQ4JWUiLWhoeEUbWSiaIJOPElQ33xHgLgBUokhzAWt0X38xUaFJ368EdMNjZzJcixRkV28A==" -> null
+      - content_md5          = "8158c88326c707304a93013a00046cf2" -> null
+      - content_sha1         = "59fd2757cb03afa74e96c41ed9ae426603d17cfd" -> null
+      - content_sha256       = "bfa7f7493a3b1c65b7af980d4eaae76f32a1deedf0dafb3fc107a99890a98280" -> null
+      - content_sha512       = "955edf6aa99565e9ee4b2de34382565222d686878451b59289a20938f125437df11e02e0054a24873016b745f7f3151a149dfaf0474c36367325c8b1464576f0" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./monday.txt" -> null
+      - id                   = "59fd2757cb03afa74e96c41ed9ae426603d17cfd" -> null
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+The file did not change, only its address did: module.monday.local_file.this became module.mon.local_file.this, so Terraform destroys the old address and creates the new one.
