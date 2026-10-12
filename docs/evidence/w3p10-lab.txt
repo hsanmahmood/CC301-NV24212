@@ -1,0 +1,61 @@
+Command: terraform output before apply
+Full output:
+â•·
+â”‚ Warning: No outputs found
+â”‚ 
+â”‚ The state file either has no outputs defined, or all the defined outputs
+â”‚ are empty. Please define an output in your configuration with the `output`
+â”‚ keyword and run `terraform refresh` for it to become available. If you are
+â”‚ using interpolation, please verify the interpolated value is not empty. You
+â”‚ can use the `terraform console` command to assist.
+â•µ
+
+Command: terraform apply -auto-approve
+Full output:
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # local_file.report will be created
+  + resource "local_file" "report" {
+      + content              = <<-EOT
+            status=ok
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./report.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + report_file = "./report.txt"
+  + report_id   = (known after apply)
+local_file.report: Creating...
+local_file.report: Creation complete after 0s [id=67ad1a04e37b2a93933045ec1121ede9f17c4735]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+report_file = "./report.txt"
+report_id = "67ad1a04e37b2a93933045ec1121ede9f17c4735"
+
+Command: terraform output
+Full output:
+report_file = "./report.txt"
+report_id = "67ad1a04e37b2a93933045ec1121ede9f17c4735"
+
+Command: terraform output -raw report_file
+Full output:
+./report.txt

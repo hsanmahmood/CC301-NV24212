@@ -1,0 +1,140 @@
+Creation command output:
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # local_file.a will be created
+  + resource "local_file" "a" {
+      + content              = <<-EOT
+            a
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./a.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.b will be created
+  + resource "local_file" "b" {
+      + content              = <<-EOT
+            b
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./b.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.summary will be created
+  + resource "local_file" "summary" {
+      + content              = <<-EOT
+            files: ./a.txt, ./b.txt
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./summary.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+local_file.a: Creating...
+local_file.b: Creating...
+local_file.b: Creation complete after 0s [id=89e6c98d92887913cadf06b2adb97f26cde4849b]
+local_file.a: Creation complete after 0s [id=3f786850e387550fdab836ed7e6dc881de23001b]
+local_file.summary: Creating...
+local_file.summary: Creation complete after 0s [id=349cd67eea479f9a85725c5958cc3c6c493bfe23]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Destruction command output:
+local_file.a: Refreshing state... [id=3f786850e387550fdab836ed7e6dc881de23001b]
+local_file.b: Refreshing state... [id=89e6c98d92887913cadf06b2adb97f26cde4849b]
+local_file.summary: Refreshing state... [id=349cd67eea479f9a85725c5958cc3c6c493bfe23]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # local_file.a will be destroyed
+  - resource "local_file" "a" {
+      - content              = <<-EOT
+            a
+        EOT -> null
+      - content_base64sha256 = "h0KPxSKAPTEGXnvOPPA/5HUJZjHl4Hu9eg/eYMTPJcc=" -> null
+      - content_base64sha512 = "FisLMvAkgtWsoKfJPdA86sOs1+QQpfGPP7mQ/JWK4N9vMiM7kYMer5nKWBqMTd+ci6MVrEgtttTqAcx4hKY1vg==" -> null
+      - content_md5          = "60b725f10c9c85c70d97880dfe8191b3" -> null
+      - content_sha1         = "3f786850e387550fdab836ed7e6dc881de23001b" -> null
+      - content_sha256       = "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7" -> null
+      - content_sha512       = "162b0b32f02482d5aca0a7c93dd03ceac3acd7e410a5f18f3fb990fc958ae0df6f32233b91831eaf99ca581a8c4ddf9c8ba315ac482db6d4ea01cc7884a635be" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./a.txt" -> null
+      - id                   = "3f786850e387550fdab836ed7e6dc881de23001b" -> null
+    }
+
+  # local_file.b will be destroyed
+  - resource "local_file" "b" {
+      - content              = <<-EOT
+            b
+        EOT -> null
+      - content_base64sha256 = "AmOCmYm2/ZVPcrqvL8ZLwuLwHWktTecphuqAj26ZgT8=" -> null
+      - content_base64sha512 = "hopqxuHQKT10+tB/bZWVKz4B09MVPbZ3p12Ad5g/1OMNtr/Im3YIqT+yZGkjOp8aCVctaHqcXaeLID6xUQQKFQ==" -> null
+      - content_md5          = "3b5d5c3712955042212316173ccf37be" -> null
+      - content_sha1         = "89e6c98d92887913cadf06b2adb97f26cde4849b" -> null
+      - content_sha256       = "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f" -> null
+      - content_sha512       = "868a6ac6e1d0293d74fad07f6d95952b3e01d3d3153db677a75d8077983fd4e30db6bfc89b7608a93fb26469233a9f1a09572d687a9c5da78b203eb151040a15" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./b.txt" -> null
+      - id                   = "89e6c98d92887913cadf06b2adb97f26cde4849b" -> null
+    }
+
+  # local_file.summary will be destroyed
+  - resource "local_file" "summary" {
+      - content              = <<-EOT
+            files: ./a.txt, ./b.txt
+        EOT -> null
+      - content_base64sha256 = "csjzQ8a7WpyJBINU81F9GNfcdYr2O3OJJIB9qi9jSEw=" -> null
+      - content_base64sha512 = "Vevl0ngvL0D28BFq7ptllOqVvDwpIAnn1amwgKA39VGRCLHFLABosMFoLA84T1Z+vYWo9h190hJ5q9+mb5Pxpw==" -> null
+      - content_md5          = "e9938761cc4ca05802542ef76c51f05e" -> null
+      - content_sha1         = "349cd67eea479f9a85725c5958cc3c6c493bfe23" -> null
+      - content_sha256       = "72c8f343c6bb5a9c89048354f3517d18d7dc758af63b738924807daa2f63484c" -> null
+      - content_sha512       = "55ebe5d2782f2f40f6f0116aee9b6594ea95bc3c292009e7d5a9b080a037f5519108b1c52c0068b0c1682c0f384f567ebd85a8f61d7dd21279abdfa66f93f1a7" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./summary.txt" -> null
+      - id                   = "349cd67eea479f9a85725c5958cc3c6c493bfe23" -> null
+    }
+
+Plan: 0 to add, 0 to change, 3 to destroy.
+local_file.summary: Destroying... [id=349cd67eea479f9a85725c5958cc3c6c493bfe23]
+local_file.summary: Destruction complete after 0s
+local_file.b: Destroying... [id=89e6c98d92887913cadf06b2adb97f26cde4849b]
+local_file.a: Destroying... [id=3f786850e387550fdab836ed7e6dc881de23001b]
+local_file.a: Destruction complete after 0s
+local_file.b: Destruction complete after 0s
+
+Destroy complete! Resources: 3 destroyed.

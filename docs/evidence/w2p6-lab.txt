@@ -1,0 +1,29 @@
+Provider version from .terraform.lock.hcl:
+5.100.0
+
+Size of .terraform:
+718,837,113 bytes
+
+Message from step 4:
+Initializing the backend...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+terraform : â•·
+At line:2 char:560
++ ... '~> 5\.0','~> 4.0' | Set-Content main.tf; terraform init 2>&1 | Tee-O ...
++                                               ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (â•·:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+â”‚ Error: Failed to query available provider packages
+â”‚ 
+â”‚ Could not retrieve the list of available versions for provider
+â”‚ hashicorp/aws: locked provider registry.terraform.io/hashicorp/aws 5.100.0
+â”‚ does not match configured version constraint ~> 4.0; must use terraform
+â”‚ init -upgrade to allow selection of new versions
+â”‚ 
+â”‚ To see which modules are currently depending on hashicorp/aws and what
+â”‚ versions are specified, run the following command:
+â”‚     terraform providers
+â•µ
