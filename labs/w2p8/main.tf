@@ -37,3 +37,7 @@ resource "aws_s3_bucket" "photos" {
   tags   = merge(local.common_tags, { Purpose = "photos" })
 }
 
+output "reports_bucket_name" {
+  description = "Name of the reports S3 bucket"
+  value       = aws_s3_bucket.reports.bucket
+}
