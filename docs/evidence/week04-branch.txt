@@ -1,0 +1,29 @@
+W4P14 - One change, one branch
+Student ID: NV24212
+Branch: add-bucket-outputs
+
+Change
+------
+Added the Terraform output `reports_bucket_name` to
+labs/w2p8/main.tf:
+
+output "reports_bucket_name" {
+  description = "Name of the reports S3 bucket"
+  value       = aws_s3_bucket.reports.bucket
+}
+
+The output exposes the reports bucket name for evidence capture without
+changing the bucket resources.
+
+Real terraform plan summary
+---------------------------
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Real git log --oneline -3
+-------------------------
+de8ff48 Add bucket name output for evidence capture
+f047a7a Add W4P13 diff versus plan evidence
+38292fc Add W3P11 lab evidence: missing Owner tag on archive
+
+The branch add-bucket-outputs was pushed to GitHub. No pull request was
+opened.
