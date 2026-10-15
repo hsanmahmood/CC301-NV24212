@@ -1,0 +1,42 @@
+W4P13 - Diff versus plan
+Student ID: NV24212
+
+Real git diff output
+--------------------
+diff --git a/main.tf b/main.tf
+index b9e3ca7..3b4e9cb 100644
+--- a/main.tf
++++ b/main.tf
+@@ -5,6 +5,6 @@ terraform {
+ }
+ 
+ resource "local_file" "archive" {
+-  filename = "${path.module}/archive.txt"
++  filename = "${path.module}/archive-2026.txt"
+   content  = "season results\n"
+ }
+
+The diff changed 1 line by removing the old filename and 1 line by
+adding the new filename (1 insertion and 1 deletion).
+
+Real terraform plan summary
+---------------------------
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+The one-word filename change in the diff is only one logical change, but
+the plan shows a replacement: Terraform destroys the existing
+local_file.archive at archive.txt and creates a new local_file.archive
+at archive-2026.txt.
+
+PR risk
+-------
+Line 1: The local file resource filename changes from archive.txt to archive-2026.txt.
+Line 2: Plan: 1 to add, 0 to change, 1 to destroy.
+Line 3: The existing archive.txt file is destroyed and replaced by archive-2026.txt; this is acceptable for this lab because the intended filename is being changed and the file contains only generated season results.
+
+Execution note
+--------------
+The local provider was used, so no AWS credentials were needed. The
+baseline was applied and committed before the filename change. The
+replacement plan was inspected, then terraform destroy -auto-approve
+was run as explicitly allowed by W4P13. No AWS resources were changed.
