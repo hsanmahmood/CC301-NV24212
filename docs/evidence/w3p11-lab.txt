@@ -1,0 +1,76 @@
+W3P11 - Find the missing tag
+Student ID: NV24212
+
+Finding
+-------
+The bucket resource aws_s3_bucket.archive was missing the Owner tag.
+
+Before the fix (copied from the real terraform plan output)
+-------------------------------------------------------------
+aws_s3_bucket.archive:
+
+      + tags                        = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "Terraform"
+          + "Purpose"     = "archive"
+          + "Unit"        = "CC301"
+        }
+
+The before plan showed Owner on aws_s3_bucket.reports and
+aws_s3_bucket.uploads, but not on aws_s3_bucket.archive.
+
+Fix
+---
+Added this tag to aws_s3_bucket.archive:
+
+    Owner = var.student_id
+
+After the fix (copied from the real terraform plan output)
+------------------------------------------------------------
+aws_s3_bucket.archive:
+
+      + tags                        = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "Terraform"
+          + "Owner"       = "NV24212"
+          + "Purpose"     = "archive"
+          + "Unit"        = "CC301"
+        }
+
+aws_s3_bucket.reports:
+
+      + tags                        = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "Terraform"
+          + "Owner"       = "NV24212"
+          + "Purpose"     = "reports"
+          + "Unit"        = "CC301"
+        }
+
+aws_s3_bucket.uploads:
+
+      + tags                        = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "Terraform"
+          + "Owner"       = "NV24212"
+          + "Purpose"     = "uploads"
+          + "Unit"        = "CC301"
+        }
+
+All three buckets now have the same four shared tags and values:
+Environment = "dev", ManagedBy = "Terraform", Owner = "NV24212", and
+Unit = "CC301". The plan also contains the intentional bucket-specific
+Purpose tag: "archive", "reports", or "uploads".
+
+How it was spotted
+------------------
+I compared the tag maps in the before plan rather than comparing the
+Terraform source line by line. The archive map was the only one without
+Owner, while reports and uploads both showed Owner = "NV24212".
+
+Execution note
+--------------
+Dummy AWS credentials were used, with the AWS provider's temporary
+offline validation skip settings in the lab copy only. Those settings
+were removed before cleanup. No terraform apply or terraform destroy
+was run; nothing was applied.
