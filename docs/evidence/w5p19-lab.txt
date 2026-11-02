@@ -1,0 +1,28 @@
+W5P19 - Finding the dangerous change
+Student ID: NV24212
+
+Plan A summary
+--------------
+Plan: 1 to add, 3 to change, 1 to destroy.
+
+Replacement marker
+------------------
+The supplied Plan A contains this replacement line:
+
+bucket = "cc301-dev-logs" -> "cc301-dev-access-logs" # forces replacement
+
+Risk
+----
+Renaming aws_s3_bucket.logs forces replacement, and force_destroy = true
+means every object in the old logs bucket can be deleted.
+
+Pull request description check
+-----------------------------
+The supplied material does not include a pull request description for
+Plan A, so I cannot confirm that the replacement and data-loss risk were
+disclosed.
+
+Decision
+--------
+DO NOT APPROVE until the pull request description explicitly explains
+the logs bucket replacement and the possible deletion of its objects.
