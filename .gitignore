@@ -3,3 +3,7 @@
 .terraform/
 *.tfvars
 .terraform.lock.hcl
+!example.tfvars
+tfplan
+*.tfplan
+crash.log
