@@ -1,0 +1,43 @@
+W5P17 - Three checks, three jobs
+Student ID: NV24212
+
+terraform fmt
+--------------
+Caught: It formatted the deliberately unaligned resource body; plain
+terraform fmt completed without reporting a configuration error.
+Missed: It did not detect the unsupported argument bucketname.
+Note: terraform fmt -diff could not run its diff step on this Windows
+machine because diff.exe was not found on PATH.
+
+terraform validate
+------------------
+Caught:
+Error: Unsupported argument
+  on main.tf line 15, in resource "aws_s3_bucket" "lab":
+  15:   bucketname = "test"
+An argument named "bucketname" is not expected here.
+Missed: With the argument restored to bucket and the name set to test,
+terraform validate reported Success! The configuration is valid. It did
+not check whether the bucket name was globally available.
+
+terraform plan
+--------------
+Caught: It produced a real plan for the corrected bucket name
+cc301-nv24212-w5p17-final:
+Plan: 1 to add, 0 to change, 0 to destroy.
+Missed: It also produced the same create plan for bucket = "test":
+Plan: 1 to add, 0 to change, 0 to destroy. It did not detect global
+bucket-name availability before apply.
+
+Why validate can pass while apply is rejected
+---------------------------------------------
+Validate checks Terraform configuration locally, while apply performs
+provider API calls and can be rejected by AWS for runtime conditions
+such as permissions or a bucket name that is already unavailable.
+
+Apply blocker
+-------------
+The permitted apply attempt was rejected after bucket creation began:
+AccessDenied: not authorized to perform
+s3:GetBucketObjectLockConfiguration with an explicit deny in a service
+control policy.
