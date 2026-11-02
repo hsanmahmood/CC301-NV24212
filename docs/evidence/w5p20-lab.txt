@@ -1,0 +1,69 @@
+W5P20 - Four-question risk test
+Student ID: NV24212
+
+Plan B - "Add the CostCentre tag to every bucket."
+---------------------------------------------------
+Q1 - What is destroyed?
+Plan: 0 to add, 2 to change, 0 to destroy.
+Nothing is destroyed.
+
+Q2 - Can it be recovered?
+Yes. The plan only adds a tag to existing buckets; no bucket data is
+removed.
+
+Q3 - Does the plan match the stated intent?
+Yes. It adds CostCentre = "cc301" to the assets and reports buckets.
+
+Q4 - Who else is affected right now?
+No service interruption is shown. Users of the buckets remain in place;
+the tag change may affect cost/reporting classification.
+
+Decision: APPLY
+
+Plan C - "Add a backups bucket with versioning."
+------------------------------------------------
+Q1 - What is destroyed?
+Plan: 2 to add, 0 to change, 0 to destroy.
+Nothing is destroyed.
+
+Q2 - Can it be recovered?
+Yes. No existing resource or data is removed; the new empty backups
+bucket and its versioning configuration can be removed if necessary.
+
+Q3 - Does the plan match the stated intent?
+Yes. It creates aws_s3_bucket.backups and
+aws_s3_bucket_versioning.backups with status Enabled.
+
+Q4 - Who else is affected right now?
+No existing shared resource is changed or removed. The plan adds an
+empty bucket and versioning configuration.
+
+Decision: APPLY
+
+Plan D - "Tidy variable names: rename var.env_short to var.environment.
+No infrastructure changes expected."
+------------------------------------------------------------------------
+Q1 - What is destroyed?
+Plan: 2 to add, 0 to change, 2 to destroy.
+aws_dynamodb_table.orders and aws_s3_bucket.data are replaced.
+
+Q2 - Can it be recovered?
+No. Rebuilding the orders table does not restore its order data. The
+data bucket has force_destroy = true, so objects in it can be deleted.
+
+Q3 - Does the plan match the stated intent?
+No. The description says no infrastructure changes are expected, but
+the plan replaces both the orders table and the data bucket.
+
+Q4 - Who else is affected right now?
+Users and processes using the shared orders table or data bucket can
+lose access and data during replacement.
+
+Decision: DO NOT APPLY
+Deciding question: Q3 - the plan contradicts the stated intent.
+
+Review comment
+--------------
+Please do not apply this: renaming the variables unexpectedly replaces
+the orders table and force-destroys the data bucket, so the description
+must be corrected or the infrastructure changes removed.
